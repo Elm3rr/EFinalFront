@@ -117,7 +117,7 @@ export default function VehiculoForm({ editando, onGuardar, onLimpiar }: Vehicul
           <span>Año</span>
           <YearField
             value={form.anio}
-            placeholder="Seleccione el año"
+            placeholder="Seleccione"
             min={1900}
             max={ANIO_MAX}
             onChange={(v) => setForm((f) => ({ ...f, anio: v }))}
