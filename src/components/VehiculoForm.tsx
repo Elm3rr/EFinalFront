@@ -1,15 +1,19 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import type { Vehiculo, VehiculoInput } from '../types/vehiculo';
-import { IconBroom, IconSave, IconCar } from './icons';
+import { IconBroom, IconCar, IconSave } from './icons';
+import YearField from './YearField';
 
 const ANIO_MAX = new Date().getFullYear() + 1;
 
-const FORM_VACIO: VehiculoInput = {
+// En el formulario el año puede estar vacío mientras se llena
+type FormState = Omit<VehiculoInput, 'anio'> & { anio: number | null };
+
+const FORM_VACIO: FormState = {
   placa: '',
   marca: '',
   modelo: '',
-  anio: new Date().getFullYear(),
+  anio: null,
   color: '',
   estado: true,
 };
@@ -21,7 +25,7 @@ interface VehiculoFormProps {
 }
 
 export default function VehiculoForm({ editando, onGuardar, onLimpiar }: VehiculoFormProps) {
-  const [form, setForm] = useState<VehiculoInput>(FORM_VACIO);
+  const [form, setForm] = useState<FormState>(FORM_VACIO);
   const [guardando, setGuardando] = useState(false);
 
   useEffect(() => {
@@ -47,14 +51,14 @@ export default function VehiculoForm({ editando, onGuardar, onLimpiar }: Vehicul
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!form.anio || form.anio < 1900 || form.anio > ANIO_MAX) {
-      toast.error(`Ingresa un año válido (1900 - ${ANIO_MAX})`);
+    if (form.anio === null) {
+      toast.error('Selecciona el año del vehículo');
       return;
     }
 
     setGuardando(true);
     const ok = await onGuardar(
-      { ...form, placa: form.placa.trim().toUpperCase() },
+      { ...form, anio: form.anio, placa: form.placa.trim().toUpperCase() },
       editando?.id,
     );
     setGuardando(false);
@@ -111,14 +115,12 @@ export default function VehiculoForm({ editando, onGuardar, onLimpiar }: Vehicul
       <div className="form-row">
         <label className="form-field">
           <span>Año</span>
-          <input
-            type="number"
-            placeholder="Ingrese el año"
+          <YearField
+            value={form.anio}
+            placeholder="Seleccione el año"
             min={1900}
             max={ANIO_MAX}
-            value={form.anio}
-            onChange={(e) => setForm((f) => ({ ...f, anio: Number(e.target.value) }))}
-            required
+            onChange={(v) => setForm((f) => ({ ...f, anio: v }))}
           />
         </label>
 
