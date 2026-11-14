@@ -108,29 +108,31 @@ export default function VehiculoForm({ editando, onGuardar, onLimpiar }: Vehicul
         />
       </label>
 
-      <label className="form-field">
-        <span>Año</span>
-        <input
-          type="number"
-          placeholder="Ingrese el año"
-          min={1900}
-          max={ANIO_MAX}
-          value={form.anio}
-          onChange={(e) => setForm((f) => ({ ...f, anio: Number(e.target.value) }))}
-          required
-        />
-      </label>
+      <div className="form-row">
+        <label className="form-field">
+          <span>Año</span>
+          <input
+            type="number"
+            placeholder="Ingrese el año"
+            min={1900}
+            max={ANIO_MAX}
+            value={form.anio}
+            onChange={(e) => setForm((f) => ({ ...f, anio: Number(e.target.value) }))}
+            required
+          />
+        </label>
 
-      <label className="form-field">
-        <span>Color</span>
-        <input
-          type="text"
-          placeholder="Ingrese el color"
-          value={form.color}
-          onChange={(e) => setForm((f) => ({ ...f, color: e.target.value }))}
-          required
-        />
-      </label>
+        <label className="form-field">
+          <span>Color</span>
+          <input
+            type="text"
+            placeholder="Ingrese el color"
+            value={form.color}
+            onChange={(e) => setForm((f) => ({ ...f, color: e.target.value }))}
+            required
+          />
+        </label>
+      </div>
 
       <label className="form-field">
         <span>Estado</span>
