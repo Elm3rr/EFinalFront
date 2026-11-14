@@ -304,7 +304,8 @@
   color: var(--color-text);
 }
 
-.form-field input {
+.form-field input,
+.form-field select {
   font-size: 14px;
   font-weight: 400;
   padding: 11px 14px;
@@ -318,7 +319,8 @@
   color: var(--color-placeholder);
 }
 
-.form-field input:focus {
+.form-field input:focus,
+.form-field select:focus {
   outline: none;
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px var(--color-primary-light);
@@ -548,4 +550,27 @@
   .container {
     padding: 20px 16px 40px;
   }
+}
+
+.form-field select {
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.estado-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.estado-badge--activo {
+  background: #e6f6ec;
+  color: #1a7f43;
+}
+
+.estado-badge--inactivo {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
 }

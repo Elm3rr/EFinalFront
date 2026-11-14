@@ -5,6 +5,7 @@ export interface Vehiculo {
   modelo: string;
   anio: number;
   color: string;
+  estado: boolean;
 }
 
 export interface VehiculoInput {
@@ -13,4 +14,5 @@ export interface VehiculoInput {
   modelo: string;
   anio: number;
   color: string;
+  estado: boolean;
 }

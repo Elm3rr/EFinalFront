@@ -48,13 +48,14 @@ export default function VehiculoListado({
               <th>Modelo</th>
               <th>Año</th>
               <th>Color</th>
+              <th>Estado</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             {paginaVehiculos.length === 0 ? (
               <tr>
-                <td colSpan={7} className="vehiculos-table__empty">
+                <td colSpan={8} className="vehiculos-table__empty">
                   No hay vehículos registrados
                 </td>
               </tr>
@@ -67,6 +68,13 @@ export default function VehiculoListado({
                   <td>{vehiculo.modelo}</td>
                   <td>{vehiculo.anio}</td>
                   <td>{vehiculo.color}</td>
+                  <td>
+                    <span
+                      className={`estado-badge ${vehiculo.estado ? 'estado-badge--activo' : 'estado-badge--inactivo'}`}
+                    >
+                      {vehiculo.estado ? 'Activo' : 'Inactivo'}
+                    </span>
+                  </td>
                   <td>
                     <div className="table-actions">
                       <button

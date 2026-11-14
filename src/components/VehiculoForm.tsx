@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import type { Vehiculo, VehiculoInput } from '../types/vehiculo';
-import { IconBroom, IconSave, IconUser } from './icons';
+import { IconBroom, IconSave, IconCar } from './icons';
 
 const ANIO_MAX = new Date().getFullYear() + 1;
 
@@ -11,6 +11,7 @@ const FORM_VACIO: VehiculoInput = {
   modelo: '',
   anio: new Date().getFullYear(),
   color: '',
+  estado: true,
 };
 
 interface VehiculoFormProps {
@@ -31,6 +32,7 @@ export default function VehiculoForm({ editando, onGuardar, onLimpiar }: Vehicul
         modelo: editando.modelo,
         anio: editando.anio,
         color: editando.color,
+        estado: editando.estado,
       });
     } else {
       setForm(FORM_VACIO);
@@ -65,7 +67,7 @@ export default function VehiculoForm({ editando, onGuardar, onLimpiar }: Vehicul
     <form className="vehiculo-form" onSubmit={handleSubmit}>
       <div className="card__header card__header--form">
         <span className="form-badge">
-          <IconUser size={22} color="#1656d9" />
+          <IconCar size={22} color="#1656d9" />
         </span>
         <div>
           <h2>{editando ? `Editar vehículo #${editando.id}` : 'Vehículo'}</h2>
@@ -128,6 +130,17 @@ export default function VehiculoForm({ editando, onGuardar, onLimpiar }: Vehicul
           onChange={(e) => setForm((f) => ({ ...f, color: e.target.value }))}
           required
         />
+      </label>
+
+      <label className="form-field">
+        <span>Estado</span>
+        <select
+          value={form.estado ? 'activo' : 'inactivo'}
+          onChange={(e) => setForm((f) => ({ ...f, estado: e.target.value === 'activo' }))}
+        >
+          <option value="activo">Activo</option>
+          <option value="inactivo">Inactivo</option>
+        </select>
       </label>
 
       <div className="form-actions">
