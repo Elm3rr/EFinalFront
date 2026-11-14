@@ -484,6 +484,11 @@
   border-top: 1px solid var(--color-border);
 }
 
+.form-actions .btn {
+  flex: 1;
+  justify-content: center;
+}
+
 .dialog-overlay {
   position: fixed;
   inset: 0;
@@ -579,7 +584,7 @@
 
 .form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 16px;
 }
 
